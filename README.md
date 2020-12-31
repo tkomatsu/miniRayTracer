@@ -1,6 +1,6 @@
 # miniRT
 ### Description
-Generate simple raytracing image
+This program is to generate images using the Raytracing protocol.
 ![Sample image](images/sample.bmp)
 
 ### Requirement
@@ -33,5 +33,8 @@ Generate BMP file
 ./miniRT <rt filepath> --save
 ```
 
+### Authors
+* **Tatsuhiro Komatsu**
+
 ### License
-"miniRT" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
