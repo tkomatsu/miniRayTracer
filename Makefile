@@ -11,15 +11,15 @@
 # **************************************************************************** #
 
 # Colors
-_GREY	= \x1b[30m
-_RED	= \x1b[31m
-_GREEN	= \x1b[32m
-_YELLOW	= \x1b[33m
-_BLUE	= \x1b[34m
-_PURPLE	= \x1b[35m
-_CYAN	= \x1b[36m
-_WHITE	= \x1b[37m
-_END	= \x1b[0m
+_GREY	= \033[30m
+_RED	= \033[31m
+_GREEN	= \033[32m
+_YELLOW	= \033[33m
+_BLUE	= \033[34m
+_PURPLE	= \033[35m
+_CYAN	= \033[36m
+_WHITE	= \033[37m
+_END	= \033[0m
 
 # OS
 UNAME := $(shell uname)
