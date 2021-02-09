@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 18:20:50 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/28 21:33:13 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/09 22:00:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ int	close_win(t_mrt *mrt)
 	return (0);
 }
 
+#ifdef LINUX
+
+int	loop_hook(t_mrt *mrt)
+{
+	mlx_key_hook(mrt->mlx.win_ptr, key_hundle, mrt);
+	mlx_hook(mrt->mlx.win_ptr, CLIENTMESSAGE, STRUCTURENOTIFYMASK,
+				close_win, mrt);
+	mlx_hook(mrt->mlx.win_ptr, FOCUSIN, FOCUSCHANGEMASK, show_rt, mrt);
+	mlx_loop(mrt->mlx.mlx_ptr);
+	return (0);
+}
+
+#else
+
 int	loop_hook(t_mrt *mrt)
 {
 	mlx_key_hook(mrt->mlx.win_ptr, key_hundle, mrt);
@@ -48,3 +62,5 @@ int	loop_hook(t_mrt *mrt)
 	mlx_loop(mrt->mlx.mlx_ptr);
 	return (0);
 }
+
+#endif
