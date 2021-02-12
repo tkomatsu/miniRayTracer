@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:12:26 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/29 17:42:11 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 21:20:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	export_bmp(t_mrt *mrt, char *name);
 
 int		raytrace(t_mrt *mrt);
 
-t_color	amb_init(t_amb ambient);
+t_color	amb_init(t_amb ambient, t_ip *intp);
 t_ray	*ray_init(t_camera *cam, int i, int j, t_mlx mlx);
 
 int		raytrace_cam(t_camera *cam, t_mrt *mrt);

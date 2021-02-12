@@ -6,22 +6,19 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 08:47:22 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/28 17:56:18 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 21:19:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_color	amb_init(t_amb ambient)
+t_color	amb_init(t_amb ambient, t_ip *intp)
 {
 	t_color	col;
-	double	ratio;
 
-	ratio = ambient.ratio /
-			(ambient.color.r + ambient.color.g + ambient.color.b);
-	col.r = ambient.color.r * ratio;
-	col.g = ambient.color.g * ratio;
-	col.b = ambient.color.b * ratio;
+	col.r = ambient.color.r * ambient.ratio * intp->color.r;
+	col.g = ambient.color.g * ambient.ratio * intp->color.g;
+	col.b = ambient.color.b * ambient.ratio * intp->color.b;
 	return (col);
 }
 
@@ -64,7 +61,7 @@ int		calc_ray(t_ray *ray, t_mrt *mrt, t_color *col)
 	intp = get_nearest_point(mrt->scene.shapes, ray);
 	if (intp)
 	{
-		*col = amb_init(mrt->scene.ambient);
+		*col = amb_init(mrt->scene.ambient, intp);
 		while (lights)
 		{
 			shadow_ray = get_sray(intp, lights->content);
