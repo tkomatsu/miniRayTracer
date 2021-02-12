@@ -6,7 +6,7 @@
 #    By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 20:22:12 by tkomatsu          #+#    #+#              #
-#    Updated: 2020/12/28 16:53:56 by tkomatsu         ###   ########.fr        #
+#    Updated: 2021/02/12 21:09:01 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,39 +27,8 @@ UNAME := $(shell uname)
 NAME = miniRT
 
 CC = gcc
-
 INCLUDE = includes
-SRC_DIR = srcs/
 LIB = lib/
-
-FILES =	main.c\
-		utils/bmp.c \
-		utils/show_rt.c \
-		utils/img_init.c \
-		utils/color.c \
-		utils/ft_mlx_pixel_put.c \
-		utils/loop_hook.c \
-		utils/export.c \
-		utils/mem_free.c \
-		utils/err_handle.c \
-		readfile/read_rt.c \
-		readfile/read_shapes.c \
-		readfile/read_util.c \
-		raytrace/raytrace.c \
-		raytrace/get_nearest.c \
-		raytrace/hit_decision_sphere.c \
-		raytrace/hit_decision_plane.c \
-		raytrace/hit_decision_square.c \
-		raytrace/hit_decision_triangle.c \
-		raytrace/hit_decision_cylinder.c \
-		raytrace/calc_ray.c \
-		raytrace/specular.c \
-		raytrace/diffuse.c
-#		../test/print_mrt.c
-
-SRCS = $(addprefix $(SRC_DIR), $(FILES))
-
-OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra -I $(INCLUDE)
 OSX_MACRO = -D OSX
@@ -80,17 +49,56 @@ ifeq ($(UNAME),Linux)
 	FLAGS += $(LINUX_FLAGS)
 endif
 
+SRC_DIR = srcs/
+
+SRC_FILES =	main.c\
+			utils/bmp.c \
+			utils/show_rt.c \
+			utils/img_init.c \
+			utils/color.c \
+			utils/ft_mlx_pixel_put.c \
+			utils/loop_hook.c \
+			utils/export.c \
+			utils/mem_free.c \
+			utils/err_handle.c \
+			readfile/read_rt.c \
+			readfile/read_shapes.c \
+			readfile/read_util.c \
+			raytrace/raytrace.c \
+			raytrace/get_nearest.c \
+			raytrace/hit_decision_sphere.c \
+			raytrace/hit_decision_plane.c \
+			raytrace/hit_decision_square.c \
+			raytrace/hit_decision_triangle.c \
+			raytrace/hit_decision_cylinder.c \
+			raytrace/calc_ray.c \
+			raytrace/specular.c \
+			raytrace/diffuse.c
+
+OBJ_DIR = objs/
+OBJS = $(SRC_FILES:%.c=$(OBJ_DIR)%.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	@printf "$(_END)\n"
 	@make -C $(LIB)libft
 	@make -C $(LIB)libvct
 	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS) -o $@
 	@echo "$(_GREEN)Finish compiling $(NAME)!"
 	@echo "Try \"./$(NAME) <rt file>\" to use$(_END)"
 
-.c.o:
+$(OBJS): $(OBJ_DIR)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@printf "$(_GREEN)█"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)utils
+	@mkdir -p $(OBJ_DIR)readfile
+	@mkdir -p $(OBJ_DIR)raytrace
 
 debug: CFLAGS += $(DEBUG_CFLAGS)
 debug: re
@@ -104,14 +112,14 @@ clean:
 	@echo "$(_YELLOW)Removing object files ...$(_END)"
 	@make clean -C $(LIB)libft
 	@make clean -C $(LIB)libvct
-	@rm -f $(OBJS)
+	@rm -fr $(OBJ_DIR)
 	@rm -fr *.dSYM
 
 fclean:
 	@echo "$(_RED)Removing object files and program ...$(_END)"
 	@make fclean -C $(LIB)libft
 	@make fclean -C $(LIB)libvct
-	@rm -f $(NAME) $(OBJS)
+	@rm -fr $(NAME) $(OBJ_DIR)
 	@rm -fr *.dSYM
 
 re: fclean all
