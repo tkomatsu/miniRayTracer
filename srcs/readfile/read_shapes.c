@@ -6,7 +6,7 @@
 /*   By: tkomatsu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:23:03 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/31 11:24:21 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 22:03:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_shape	*read_sphere(char *line)
 	iterate_space(&line);
 	shape->color = read_col(&line);
 	color_in_range(shape->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	return (shape);
 }
 
@@ -51,6 +53,8 @@ t_shape	*read_plane(char *line)
 	iterate_space(&line);
 	shape->color = read_col(&line);
 	color_in_range(shape->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	return (shape);
 }
 
@@ -77,6 +81,8 @@ t_shape	*read_square(char *line)
 	iterate_space(&line);
 	shape->color = read_col(&line);
 	color_in_range(shape->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	return (shape);
 }
 
@@ -104,6 +110,8 @@ t_shape	*read_cylinder(char *line)
 		line++;
 	shape->color = read_col(&line);
 	color_in_range(shape->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	return (shape);
 }
 
@@ -125,5 +133,7 @@ t_shape	*read_triangle(char *line)
 	iterate_space(&line);
 	shape->color = read_col(&line);
 	color_in_range(shape->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	return (shape);
 }

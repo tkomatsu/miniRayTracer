@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 16:18:31 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/31 11:26:00 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 22:13:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_color	read_col(char **line)
 	col.b = ft_atof(s) / 255.0;
 	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
+	iterate_space(&s);
 	*line = s;
 	return (col);
 }
@@ -70,6 +71,7 @@ t_vec3	read_vec(char **line)
 	v.z = ft_atof(s);
 	while (ft_isdigit(*s) || *s == '.' || *s == '-')
 		s++;
+	iterate_space(&s);
 	*line = s;
 	return (v);
 }
@@ -92,6 +94,8 @@ int		read_lights(char *line, t_mrt *mrt)
 	iterate_space(&line);
 	light->color = read_col(&line);
 	color_in_range(light->color, tmp);
+	if (*line)
+		exit_fatal(8, line);
 	ft_lstadd_back(&(mrt->scene.lights), ft_lstnew(light));
 	return (0);
 }
@@ -107,13 +111,17 @@ int		read_cameras(char *line, t_mrt *mrt)
 		line++;
 	iterate_space(&line);
 	cam->point = read_vec(&line);
-	while (ft_isspace(*line))
-		line++;
+	iterate_space(&line);
 	cam->normal = read_vec(&line);
 	vec_in_range(cam->normal, tmp);
 	iterate_space(&line);
 	cam->fov = ft_atof(line);
 	in_range(cam->fov, 0, 180, tmp);
+	while (ft_isdigit(*line) || *line == '.' || *line == '-')
+		line++;
+	iterate_space(&line);
+	if (*line)
+		exit_fatal(8, line);
 	cam->img_ptr = NULL;
 	ft_lstadd_back(&(mrt->mlx.cameras), ft_lstnew(cam));
 	if (!mrt->mlx.current)
