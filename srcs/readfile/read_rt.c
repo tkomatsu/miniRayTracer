@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 13:40:08 by tkomatsu          #+#    #+#             */
-/*   Updated: 2021/02/12 18:23:57 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:36:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	read_res(char *line, t_mrt *mrt)
 	if (!mrt->mlx.rx || !mrt->mlx.ry)
 		exit_fatal(8, tmp);
 	flag = 1;
-	return (0);
+	return (1);
 }
 
 static int	read_shapes(char *line, t_mrt *mrt)
@@ -102,6 +102,7 @@ int			read_rt(char *filepath, t_mrt *mrt)
 	int		fd;
 	char	*line;
 	int		ret;
+	int		flag;
 
 	line = filepath;
 	while (*line)
@@ -113,11 +114,13 @@ int			read_rt(char *filepath, t_mrt *mrt)
 		exit_fatal(9, filepath);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		read_elem(line, mrt);
+		flag += read_elem(line, mrt);
 		ft_free(line);
 	}
 	if (ret == 0)
-		read_elem(line, mrt);
+		flag += read_elem(line, mrt);
+	if (!flag)
+		exit_fatal(8, "no Resolution");
 	ft_free(line);
 	close(fd);
 	return (0);
