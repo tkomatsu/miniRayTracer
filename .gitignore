@@ -63,3 +63,5 @@ lib/minilibx_mms/*
 lib/minilibx_opengl/*
 !lib/libmlx.a
 !lib/libmlx_linux.a
+images/*
+!images/sample.bmp
