@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 13:58:04 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/29 17:42:56 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 20:49:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int			img_init(t_mlx *mlx, _Bool bmp)
 	ft_putstr_fd("images initializing...\n", 1);
 	mlx->mlx_ptr = mlx_init();
 	mlx_get_screen_size(mlx->mlx_ptr, &x, &y);
-	if (x < (int)mlx->rx)
+	if (x < (int)mlx->rx && !bmp)
 		mlx->rx = x;
 	else
 		x = (int)mlx->rx;
-	if (y < (int)mlx->ry)
+	if (y < (int)mlx->ry && !bmp)
 		mlx->ry = y;
 	else
 		y = (int)mlx->ry;
