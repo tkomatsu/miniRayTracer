@@ -6,14 +6,14 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 21:03:36 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/23 16:43:37 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 21:23:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-#define SHININESS 1000.0
-#define SPECULAR 0.5
+#define SHININESS 20.0
+#define SPECULAR 0.2
 
 double	specular_reflect(t_vec3 *ref_l, t_vec3 *rev_r, double lc)
 {
