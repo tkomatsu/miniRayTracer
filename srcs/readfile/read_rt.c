@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 13:40:08 by tkomatsu          #+#    #+#             */
-/*   Updated: 2020/12/31 11:21:40 by tkomatsu         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:23:57 by tkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 static int	read_amb(char *line, t_mrt *mrt)
 {
-	char	*tmp;
+	char		*tmp;
+	static int	flag;
 
 	tmp = line;
+	if (flag)
+		exit_fatal(8, tmp);
 	if (*line == 'A')
 		line++;
 	iterate_space(&line);
@@ -29,14 +32,18 @@ static int	read_amb(char *line, t_mrt *mrt)
 		exit_fatal(8, tmp);
 	mrt->scene.ambient.color = read_col(&line);
 	color_in_range(mrt->scene.ambient.color, tmp);
+	flag = 1;
 	return (0);
 }
 
 static int	read_res(char *line, t_mrt *mrt)
 {
-	char	*tmp;
+	char		*tmp;
+	static int	flag;
 
 	tmp = line;
+	if (flag)
+		exit_fatal(8, tmp);
 	if (*line == 'R')
 		line++;
 	iterate_space(&line);
@@ -47,6 +54,7 @@ static int	read_res(char *line, t_mrt *mrt)
 	mrt->mlx.ry = ft_atoi(line);
 	if (!mrt->mlx.rx || !mrt->mlx.ry)
 		exit_fatal(8, tmp);
+	flag = 1;
 	return (0);
 }
 
