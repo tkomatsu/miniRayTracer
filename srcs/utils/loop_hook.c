@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 18:20:50 by tkomatsu          #+#    #+#             */
-/*   Updated: 2021/02/09 22:00:59 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/27 11:21:20 by tkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	key_hundle(int keycode, t_mrt *mrt)
 	}
 	else if (keycode == N_KEY)
 	{
+		if (!mrt->mlx.cameras)
+			return (0);
 		if (mrt->mlx.current->next)
 			mrt->mlx.current = mrt->mlx.current->next;
 		else
