@@ -6,7 +6,7 @@
 /*   By: tkomatsu <tkomatsu@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 13:40:08 by tkomatsu          #+#    #+#             */
-/*   Updated: 2021/02/12 21:58:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/27 11:19:53 by tkomatsu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int			read_rt(char *filepath, t_mrt *mrt)
 	int		flag;
 
 	line = filepath;
+	flag = 0;
 	while (*line)
 		line++;
 	if (*line == 't' || *(line - 1) == 'r' || *(line - 2) == '.')
