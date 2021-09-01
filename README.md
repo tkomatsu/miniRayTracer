@@ -1,6 +1,7 @@
-# miniRT
+# miniRayTracer
 ### Description
-This program is to generate images using the Raytracing protocol.
+This program is to generate images using raytracing.
+
 ![Sample image](images/sample.bmp)
 
 ### Requirement
@@ -17,7 +18,7 @@ This program is to generate images using the Raytracing protocol.
 
 ### Installation
 ```shell
-git clone --recursive https://github.com/tkomatsu/miniRT
+git clone --recursive https://github.com/tkomatsu/miniRayTracer
 cd miniRT
 make
 ```
@@ -32,6 +33,8 @@ Generate BMP file
 ```shell
 ./miniRT <rt filepath> --save
 ```
+
+There are some sample files in [scene](scene)
 
 ### Authors
 * **Tatsuhiro Komatsu**
