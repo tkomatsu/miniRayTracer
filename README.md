@@ -2,7 +2,7 @@
 ### Description
 This program is to generate images using raytracing.
 
-![Sample image](images/sample.bmp)
+![Sample image](images/minirt.png)
 
 ### Requirement
 #### MacOS
